@@ -38,4 +38,4 @@ run:
 	foreman start
 
 generate:
-	python manage.py syncdb
+	python manage.py --noinput migrate
