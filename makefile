@@ -12,7 +12,7 @@ deploy: prepdeploy check test
 	git push heroku master
 	heroku run python manage.py syncdb
 
-test: utest ftest ctest
+test: utest ctest ftest
 
 # unit tests
 utest: $(PYTHON_CODE)
