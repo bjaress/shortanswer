@@ -4,6 +4,7 @@
   "dependencies": {
     "node-sass": "latest",
     "coffee-script": "latest",
-    "browserify": "latest"
+    "browserify": "latest",
+    "nodeunit": "latest"
   }
 }
