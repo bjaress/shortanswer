@@ -1,0 +1,25 @@
+{% load compress %}
+
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet"
+             href="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.min.css" />
+        <script
+            src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script
+            src="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.min.js"
+            ></script>
+        {% compress css %}
+        <link rel="stylesheet" href="/static/shortapp.sass" type="text/x-sass" charset="utf-8">
+        {% endcompress %}
+        {% compress js %}
+        <script type="text/coffeescript" charset="utf-8"
+            src="/static/{% block script %}shortapp{% endblock %}.coffee"></script>
+        {% endcompress %}
+        {% block head %}{% endblock %}
+    </head>
+    <body {% block bodyattr %}{% endblock %}>
+        {% block body %}{% endblock %}
+    </body>
+</html>

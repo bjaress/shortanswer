@@ -1,0 +1,9 @@
+{
+  "name": "shortanswer",
+  "version": "0.0.0",
+  "dependencies": {
+    "node-sass": "latest",
+    "coffee-script": "latest",
+    "browserify": "latest"
+  }
+}
