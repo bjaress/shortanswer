@@ -6,7 +6,6 @@ COFFEESCRIPT_CODE:=$(shell find shortanswer/static shortanswer/test_static -inam
 
 prepdeploy:
 	git diff --exit-code
-	git remote show heroku
 
 push: prepdeploy check utest ctest
 	git push
