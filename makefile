@@ -13,18 +13,18 @@ push: prepdeploy check utest ctest
 
 deploy: prepdeploy check test
 	git push heroku master
-	heroku run python manage.py syncdb
+	heroku run python manage.py migrate --noinput
 
 test: utest ctest ftest
 
 # unit tests
 utest: $(PYTHON_CODE)
-	python manage.py test shortapp.tests
+	python manage.py test --noinput shortapp.tests
 
 # functional tests
 ftest: generate
 	make run > /tmp/log &
-	python manage.py --noinput test functional_tests || (killall gunicorn ; false)
+	python manage.py test --noinput functional_tests$(FTEST) || (killall gunicorn ; false)
 	killall gunicorn
 
 # client-side tests
@@ -38,4 +38,4 @@ run:
 	foreman start
 
 generate:
-	python manage.py --noinput migrate
+	python manage.py migrate --noinput
