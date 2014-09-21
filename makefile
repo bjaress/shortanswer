@@ -11,11 +11,11 @@ prepdeploy:
 push: prepdeploy check utest ctest
 	git push
 
-deploy: prepdeploy check test
+deploy: prepdeploy test
 	git push heroku master
 	heroku run python manage.py migrate --noinput
 
-test: utest ctest ftest
+test: check utest ctest ftest
 
 # unit tests
 utest: $(PYTHON_CODE)
@@ -32,7 +32,7 @@ ctest: $(COFFEESCRIPT_CODE)
 	nodeunit shortanswer/test_static
 
 check:
-	venv/bin/pylint --rcfile pylintrc shortapp
+	pylint --rcfile pylintrc shortapp
 
 run:
 	foreman start
