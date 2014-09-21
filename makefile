@@ -24,7 +24,7 @@ utest: $(PYTHON_CODE)
 # functional tests
 ftest: generate
 	make run > /tmp/log &
-	python manage.py test functional_tests || (killall gunicorn ; false)
+	python manage.py --noinput test functional_tests || (killall gunicorn ; false)
 	killall gunicorn
 
 # client-side tests
