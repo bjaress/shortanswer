@@ -8,6 +8,9 @@ prepdeploy:
 	git diff --exit-code
 	git remote show heroku
 
+integrate: prepdeploy check utest ctest
+	git push
+
 deploy: prepdeploy check test
 	git push heroku master
 	heroku run python manage.py syncdb
