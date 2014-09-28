@@ -119,5 +119,5 @@ COMPRESS_CSS_FILTERS = [
 ]
 COMPRESS_PRECOMPILERS = (
     ('text/coffeescript', 'browserify -c \'coffee -sc\' -o {outfile} {infile}'),
-    ('text/x-sass', 'node-sass {infile} {outfile}'),
+    ('text/x-sass', 'node-sass --stdout {infile}'),
 )
