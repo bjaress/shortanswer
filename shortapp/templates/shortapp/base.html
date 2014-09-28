@@ -1,7 +1,8 @@
 {% load compress %}
-
+<!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet"
              href="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.min.css" />
@@ -20,6 +21,16 @@
         {% block head %}{% endblock %}
     </head>
     <body {% block bodyattr %}{% endblock %}>
-        {% block body %}{% endblock %}
+        <div data-role="page">
+            <div data-role="header">
+                {% block header %}{% endblock %}
+            </div>
+            {% block body %}{% endblock %}
+            <div data-role="footer">
+                {% block footer %}{% endblock %}
+                <a id="sourceLink" data-role="button" data-inline="true"
+                    href="https://github.com/bjaress/shortanswer">source code</a>
+            </div>
+        </div>
     </body>
 </html>
