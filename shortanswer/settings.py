@@ -88,12 +88,11 @@ STATIC_URL = '/static/'
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
 ENV_DB = dj_database_url.config()
-if len(ENV_DB) != 0:
+ENV_KEY = os.environ.get('DJANGO_SECRET_KEY')
+if len(ENV_DB) != 0 and len(ENV_KEY) != 0:
     DATABASES['default'] = ENV_DB
+    SECRET_KEY = ENV_KEY
     DEBUG = False
-    ENV_KEY = os.environ.get('DJANGO_SECRET_KEY')
-    if len(ENV_KEY) != 0:
-        SECRET_KEY = ENV_KEY
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
