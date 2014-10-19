@@ -1,8 +1,7 @@
 from selenium import webdriver
 import unittest
 from django.test import TestCase
-
-SERVER='http://localhost:5000'
+from functional_tests import SERVER_URL
 
 class BasicLinksTest(TestCase):
     """Check that the main links are on the homepage."""
@@ -23,7 +22,7 @@ class BasicLinksTest(TestCase):
         version and fork of the source, just that a link is there.
 
         """
-        self.browser.get(SERVER)
+        self.browser.get(SERVER_URL)
         source_link = self.browser.find_element_by_id('sourceLink')
         self.assertEqual("source code", source_link.text,
                 msg="Homepage should link to source code.")
