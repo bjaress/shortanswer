@@ -1,6 +1,11 @@
-from selenium import webdriver
 from hamcrest import *
 import unittest
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import selenium.webdriver.support.expected_conditions as condition
+from selenium.webdriver.support.ui import WebDriverWait
+
 from django.test import TestCase
 from functional_tests import SERVER_URL
 
@@ -25,6 +30,10 @@ class AskQuestion(TestCase):
         question_input = self.browser.find_element_by_tag_name("textarea")
         question_input.send_keys(LONG_QUESTION)
         submit_button.click()
+
+        WebDriverWait(self.browser, 10).until(
+                condition.visibility_of_element_located(
+                    (By.CLASS_NAME, "question")))
         displayed_question = self.browser.find_element_by_class_name("question")
         assert_that(displayed_question.text, equal_to(LONG_QUESTION),
                 "Questions should be shown after they are submitted")

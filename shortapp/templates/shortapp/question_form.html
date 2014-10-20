@@ -3,8 +3,9 @@
 {% block header %}<h1>Ask a Question</h1>{% endblock %}
 
 {% block body %}
-<form>
-    <textarea>
+<form method="POST">
+    {% csrf_token %}
+    <textarea name="question">
     </textarea>
     <input type="submit" value="Ask"/>
 </form>
