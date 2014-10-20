@@ -5,8 +5,7 @@
 {% block body %}
 <form method="POST">
     {% csrf_token %}
-    <textarea name="question">
-    </textarea>
+    {{ form }}
     <input type="submit" value="Ask"/>
 </form>
 {% endblock %}

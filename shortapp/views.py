@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from .models import QuestionForm, Question
 
 # Create your views here.
 def home_page(request):
@@ -7,12 +8,16 @@ def home_page(request):
 
 def question_form(request):
     if request.method == 'GET':
-        return render(request, 'shortapp/question_form.html')
+        return render(request, 'shortapp/question_form.html',
+                {'form': QuestionForm()})
     if request.method == 'POST':
-        #TODO save question and get ID
-        #request.POST['question']
-        question_id = 1 #TODO
-        return HttpResponseRedirect('/question/'+str(question_id))
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            new_question = form.save()
+            return HttpResponseRedirect('/question/'+str(new_question.id))
+        else:
+            print(form.errors)
 
 def question(request, identifier):
-    return render(request, 'shortapp/question.html')
+    return render(request, 'shortapp/question.html',
+            {'question': Question.objects.get(id=int(identifier))})

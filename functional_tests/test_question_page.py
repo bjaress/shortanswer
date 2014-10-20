@@ -52,8 +52,7 @@ I do not know how this really happened, yet the fact remains that one
 fine day this piece of wood found itself in the shop of an old
 carpenter. His real name was Mastro Antonio, but everyone called him
 Mastro Cherry, for the tip of his nose was so round and red and shiny
-that it looked like a ripe cherry.
-"""
+that it looked like a ripe cherry."""
 
 
 if __name__ == '__main__':
