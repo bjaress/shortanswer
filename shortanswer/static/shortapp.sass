@@ -1,5 +1,20 @@
+
 body h1
   color: red
 
 div.question
   white-space: pre-wrap
+
+/*
+ * This seems like the best/only way to set the margins and width of all
+ * the content without stepping on jQuery Mobile's toes.
+ */
+div.ui-page > div
+  $ideal-content-width: 80ex
+  $min-side: 0.5ex
+
+  padding-left: $min-side
+  padding-right: $min-side
+  max-width: $ideal-content-width
+  margin-right: auto
+  margin-left:auto
