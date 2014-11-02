@@ -15,12 +15,12 @@ class QuestionTest(TestCase):
     def test_ask_question(self):
         request = HttpRequest()
         request.method = 'POST'
-        request.POST['text'] = QUESTION_TEXT
+        request.POST['question'] = QUESTION_TEXT
 
         response = question_form(request)
 
         new_question = Question.objects.latest('id')
-        assert_that(new_question.text, equal_to(QUESTION_TEXT),
+        assert_that(new_question.question, equal_to(QUESTION_TEXT),
                 "Asked questions should be saved.")
         assert_that(response['Location'],
                 ends_with('question/'+str(new_question.id)),
