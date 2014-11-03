@@ -9,7 +9,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from django.test import TestCase
 from functional_tests import SERVER_URL
 
-
 class AskQuestion(TestCase):
     """Users can ask questions."""
 
@@ -22,8 +21,19 @@ class AskQuestion(TestCase):
         """Cleanup browser."""
         self.browser.quit()
 
+    def test_login_required(self):
+        """Users must be logged in to answer a question."""
+
+        self.browser.get(SERVER_URL)
+        old_title = self.browser.title
+        self.browser.get(SERVER_URL+"/question")
+        wait = WebDriverWait(self.browser, 10)
+        wait.until_not(condition.title_is(old_title))
+        assert_that(self.browser.current_url, contains_string('login'))
+
     def test_typical_question(self):
-        """When the user does it right, it should work."""
+        """Logged in users should be able to submit questions."""
+        self.browser.get(SERVER_URL+"/accounts/login/debug")
 
         self.browser.get(SERVER_URL+"/question")
         submit_button = self.browser.find_element_by_css_selector("input[type=submit]")
@@ -37,6 +47,7 @@ class AskQuestion(TestCase):
         displayed_question = self.browser.find_element_by_class_name("question")
         assert_that(displayed_question.text, equal_to(LONG_QUESTION),
                 "Questions should be shown after they are submitted")
+        self.browser.get(SERVER_URL+"/accounts/logout")
 
 
 LONG_QUESTION = """Centuries ago there lived--
