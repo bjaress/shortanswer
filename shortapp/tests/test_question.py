@@ -1,11 +1,13 @@
 #from django.core.urlresolvers import resolve
-from django.test import TestCase
+from django.test import TestCase, Client
 from django.http import HttpRequest
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 from hamcrest import assert_that
 from hamcrest import contains_string, equal_to, ends_with
 
-from ..views import question, question_form
+from ..views import question
 from ..models import Question
 
 QUESTION_TEXT = "What brought you here, friend Geppetto?"
@@ -13,11 +15,10 @@ QUESTION_TEXT = "What brought you here, friend Geppetto?"
 class QuestionTest(TestCase):
 
     def test_ask_question(self):
-        request = HttpRequest()
-        request.method = 'POST'
-        request.POST['text'] = QUESTION_TEXT
-
-        response = question_form(request)
+        User.objects.create_user('test', password='test')
+        client = Client()
+        client.login(username='test', password='test')
+        response = client.post('/question', {'text': QUESTION_TEXT})
 
         new_question = Question.objects.latest('id')
         assert_that(new_question.text, equal_to(QUESTION_TEXT),
