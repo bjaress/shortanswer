@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from .models import QuestionForm, Question
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from django.http import Http404, HttpResponse
+from django.http import HttpResponse
 from django.contrib.auth import logout as auth_logout, login as auth_login
 from django.contrib.auth import authenticate, get_user_model
 User = get_user_model()
