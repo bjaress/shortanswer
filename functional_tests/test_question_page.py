@@ -38,6 +38,7 @@ class AskQuestion(TestCase):
         assert_that(self.browser.page_source, contains_string("True"))
 
         self.browser.get(SERVER_URL+"/question")
+        print(self.browser.page_source)
         WebDriverWait(self.browser, 10).until(
                 condition.visibility_of_element_located(
                     (By.CSS_SELECTOR, "input[type=submit]")))
