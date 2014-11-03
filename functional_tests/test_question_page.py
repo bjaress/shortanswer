@@ -35,15 +35,9 @@ class AskQuestion(TestCase):
     def test_typical_question(self):
         """Logged in users should be able to submit questions."""
         self.browser.get(SERVER_URL+"/accounts/login/debug")
-        print(self.browser.page_source)
-        print(self.browser.get_cookies())
         assert_that(self.browser.page_source, contains_string("True"))
 
         self.browser.get(SERVER_URL+"/question")
-        print(self.browser.page_source)
-        WebDriverWait(self.browser, 10).until(
-                condition.visibility_of_element_located(
-                    (By.CSS_SELECTOR, "input[type=submit]")))
         submit_button = self.browser.find_element_by_css_selector("input[type=submit]")
         question_input = self.browser.find_element_by_tag_name("textarea")
         question_input.send_keys(LONG_QUESTION)
