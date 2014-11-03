@@ -8,6 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 from django.test import TestCase
 from functional_tests import SERVER_URL
+from django.conf import settings
 
 class AskQuestion(TestCase):
     """Users can ask questions."""
@@ -34,6 +35,7 @@ class AskQuestion(TestCase):
     def test_typical_question(self):
         """Logged in users should be able to submit questions."""
         self.browser.get(SERVER_URL+"/accounts/login/debug")
+        assert_that(self.browser.page_source, contains_string("True"))
 
         self.browser.get(SERVER_URL+"/question")
         submit_button = self.browser.find_element_by_css_selector("input[type=submit]")

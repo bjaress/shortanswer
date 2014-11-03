@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from .models import QuestionForm, Question
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from django.http import Http404, HttpResponse
 from django.contrib.auth import logout as auth_logout, login as auth_login
 from django.contrib.auth import authenticate, get_user_model
 User = get_user_model()
@@ -46,7 +47,7 @@ def login_debug(request):
             user = User.objects.create_user('debug', password='debug')
         user = authenticate(username='debug', password='debug')
         auth_login(request, user)
-    return HttpResponseRedirect('/')
+    return HttpResponse(settings.DEBUG, content_type="text/plain")
 
 def logout(request):
     """Let anyone logout by hitting this URL."""
