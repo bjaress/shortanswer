@@ -42,9 +42,10 @@ def login_debug(request):
     """
 
     if settings.DEBUG:
-        user = User.objects.get(username='debug')
-        if user == None:
-            user = User.objects.create_user('debug', password='debug')
+        try:
+            User.objects.get(username='debug')
+        except User.DoesNotExist:
+            User.objects.create_user('debug', password='debug')
         user = authenticate(username='debug', password='debug')
         auth_login(request, user)
     return HttpResponse(settings.DEBUG, content_type="text/plain")
