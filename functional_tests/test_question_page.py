@@ -35,6 +35,8 @@ class AskQuestion(TestCase):
     def test_typical_question(self):
         """Logged in users should be able to submit questions."""
         self.browser.get(SERVER_URL+"/accounts/login/debug")
+        print(self.browser.page_source)
+        print(self.browser.get_cookies())
         assert_that(self.browser.page_source, contains_string("True"))
 
         self.browser.get(SERVER_URL+"/question")
